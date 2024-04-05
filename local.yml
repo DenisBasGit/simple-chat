@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  django: &django
+    build:
+      context: .
+      dockerfile: ./etc/Dockerfile
+    image: simple_chat_local_django
+    user: root
+    volumes:
+      - .:/app
+    env_file:
+      - ./.envs/.local/.django
+    ports:
+      - "8080:8080"
+    command: /bin/sh -c "python manage.py runserver_plus 0.0.0.0:8080"
